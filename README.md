@@ -1,2 +1,2 @@
-# digital-electronics-1
+# Cvičenie 1
 H2 TEST
