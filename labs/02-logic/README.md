@@ -26,11 +26,11 @@
 
    Greater than:
 
-   ![K-maps](images/B_greater_A.png)
+   [K-maps](images/B_greater_A.png)
 
    Less than:
 
-   ![K-maps](images/B_less_A.png)
+   [K-maps](images/B_less_A.png)
 
 2. Mark the largest possible implicants in the K-map and according to them, write the equations of simplified SoP (Sum of the Products) form of the "greater than" function and simplified PoS (Product of the Sums) form of the "less than" function.
 
@@ -57,7 +57,7 @@
                 (s_B_equals_A  = 'WRITE_CORRECT_VALUE_HERE') and
                 (s_B_less_A    = 'WRITE_CORRECT_VALUE_HERE'))
         -- If false, then report an error
-        report "Input combination COMPLETE_THIS_TEXT FAILED" severity error;
+        report "Input combination B=0110 A=0111 Failed" severity error;
 
         -- Report a note at the end of stimulus process
         report "Stimulus process finished";
