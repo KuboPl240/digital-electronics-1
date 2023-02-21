@@ -50,7 +50,7 @@
 
         -- First test case
         s_b <= "0110"; -- Such as "0110" if ID = xxxx67
-        s_a <= "0111";        -- Such as "0111" if ID = xxxx67
+        s_a <= "0111"; -- Such as "0111" if ID = xxxx67
         wait for 100 ns;
         -- Expected output
         assert ((s_B_greater_A = 0) and
