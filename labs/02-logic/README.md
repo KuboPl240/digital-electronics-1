@@ -53,9 +53,9 @@
         s_a <= "0111"; -- Such as "0111" if ID = xxxx67
         wait for 100 ns;
         -- Expected output
-        assert ((s_B_greater_A = 0) and
-                (s_B_equals_A  = 0) and
-                (s_B_less_A    = 1))
+        assert ((s_B_greater_A = '0') and
+                (s_B_equals_A  = '0') and
+                (s_B_less_A    = '1'))
         -- If false, then report an error
         report "Input combination B=0110 A=0111 Failed" severity error;
 
