@@ -1,4 +1,4 @@
-# Lab 4: Peter Pánisz
+# Lab 4: Jakub Plachtička
 
 ### LED(7:4) indicators
 
