@@ -41,6 +41,7 @@ entity top is
            CF : out STD_LOGIC;
            CG : out STD_LOGIC;
            AN : out std_logic_vector(7 downto 0);
+           LED : out std_logic_vector(11 downto 0);
            BTNC : in std_logic;
            SW : in STD_LOGIC);
 end top;
@@ -49,7 +50,8 @@ architecture behavioral of top is
 
   -- 4-bit counter @ 250 ms
   signal sig_en_250ms : std_logic;                    --! Clock enable signal for Counter0
-  signal sig_cnt_4bit : std_logic_vector(3 downto 0); --! Counter0
+  signal sig_cnt_4bit : std_logic_vector(3 downto 0);
+  signal sig_cnt_16bit : std_logic_vector(3 downto 0); --! Counter0
 
 begin
 
@@ -65,7 +67,28 @@ begin
           rst => BTNC,
           ce  => sig_en_250ms
       );
-
+   clk_en1 : entity work.clock_enable
+      generic map(
+          g_MAX => 25000000
+      )
+      port map(
+          clk => CLK100MHZ,
+          rst => BTNC,
+          ce  => sig_en_250ms
+      );
+  bin_cnt1 : entity work.cnt_up_down
+    generic map (
+      g_CNT_WIDTH => 12
+    )
+    port map (
+      clk    => CLK100MHZ,
+      rst    =>  BTNC,
+      en     => sig_en_250ms,
+      cnt_up => SW,
+      cnt    => sig_cnt_16bit
+    );
+    
+    
   --------------------------------------------------------
   -- Instance (copy) of cnt_up_down entity
   --------------------------------------------------------
@@ -102,5 +125,7 @@ begin
   --------------------------------------------------------
   -- Connect one common anode to 3.3V
   AN <= b"1111_1110";
+  
+  LED <= sig_cnt_16bit;
 
 end architecture behavioral;
