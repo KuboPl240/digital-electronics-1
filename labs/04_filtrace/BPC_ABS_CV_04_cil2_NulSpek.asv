@@ -1,0 +1,38 @@
+% -------------------------------------------------------------------------
+% BPC-ABS cvičení -04-          2024-02-27                  Martin Vítek 
+% Filtrace driftu a síťového rušení v signálu EKG           Lukáš Smital 
+% -------------------------------------------------------------------------
+% Cíl 2: Tento skript slouží pro filtraci EKG přes spektrální oblast - 
+% nulováním spektrálních čar. Budeme chtít odstranit harmonické složky, 
+% které odpovídají driftu (cca 0-1 Hz) a síťovému rušení (cca 49-51 Hz).
+% -------------------------------------------------------------------------
+% NAČTENÍ SIGNÁLU, VÝPOČET SPEKTR A ZOBRAZENÍ
+close all; clear; clc
+
+% Můžete využít tyto funkce:
+% load; length; fft; linspace; abs; 
+load("ekg250_50_drift.mat");
+fvz = 250;
+xos = linspace(0,fvz-(fvz/length(x)),length(x));
+figure;
+plot(xos,x);
+
+nextpow2
+Habs = abs(fft(x));
+H = fft(x);
+plot(xos,Habs);
+
+% -------------------------------------------------------------------------
+% FILTRACE NULOVÁNÍM SPEKTRÁLNÍCH ČAR
+
+nul50 = round((50/fvz)*length(x));
+nul200 = round((200/fvz)*length(x));
+figure
+H(nul50-3:nul50+3) = 0 + 0i;
+H(nul200-3:nul200+3) = 0 + 0i;
+plot(xos,H);
+figure
+plot(xos,ifft(H));
+% Můžete využít tyto funkce:
+% round; ifft; abs; indexace vektoru!!
+
